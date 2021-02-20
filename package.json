@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc && node ./dist/app.js",
+    "start": "nodemon ./src/app.ts",
+    "compile": "tsc",
     "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run compile\"",
     "lint": "eslint src/**/*.ts",
     "fix": "eslint src/**/*.ts --fix"
