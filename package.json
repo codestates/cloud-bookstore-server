@@ -10,16 +10,11 @@
     "lint": "eslint src/**/*.ts",
     "fix": "eslint src/**/*.ts --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paigekim29/cloud_bookstore-server.git"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/paigekim29/cloud_bookstore-server/issues"
-  },
-  "homepage": "https://github.com/paigekim29/cloud_bookstore-server#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
@@ -36,10 +31,5 @@
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "typescript": "^4.1.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
   }
 }
