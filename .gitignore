@@ -27,3 +27,7 @@ package-lock.json
 yarn.lock
 .eslintcache
 *.pem
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
