@@ -1,16 +1,16 @@
 # Ignore a file or directory in the context root named "modules"
-modules
+# modules
 
 # Ignore any files or directories within the subdirectory named "modules" 
 # in the context root
-modules/*
+# modules/*
 
 # Ignore any files or directories in the context root beginning with "modules"
-modules*
+# modules*
 
 # Ignore any files or directories one level down from the context root named
 # "modules"
-*/modules
+# */modules
 
 # Ignore any files or directories at any level, including the context root, 
 # named modules
@@ -18,7 +18,7 @@ modules*
 
 # Ignore every file in the entire build context (see next rule for how this 
 # could be used)
-*
+# *
 
 # Re-include the file or directory named "src" that may have been previously
 # excluded. Note that you cannot re-include files in subdirectories that have 
