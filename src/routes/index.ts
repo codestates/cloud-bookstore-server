@@ -46,7 +46,7 @@ router.post('/mypage/write/episode', controllers.writeEpisode);
 router.get('/mypage/novel/:novelId', controllers.getMyNovel);
 
 // * https://server.cloud-bookstore.com/setting/cloudhistory
-router.get('/setting/cloudhistory', controllers.cloudHistory);
+router.get('/setting/cloudhistory', controllers.getCloudHistory);
 
 // * https://server.cloud-bookstore.com/setting/nickname
 router.patch('/setting/nickname', controllers.editNickname);
