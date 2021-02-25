@@ -5,7 +5,7 @@ export default async (req: Request, res: Response): Promise<void> => {
   try {
     const ranking = await Novel.findRanking8();
     const fantasy = await Novel.findFantasy8();
-    const martialArts = await Novel.findMartialarts8();
+    const martialArts = await Novel.findMartialArts8();
     const romance = await Novel.findRomance8();
 
     res.status(200).send({ ranking, fantasy, martialArts, romance });

@@ -37,6 +37,9 @@ export default class Novel extends BaseEntity {
   userLike!: number;
 
   @Column()
+  episodeCount!: number;
+
+  @Column()
   complete!: boolean;
 
   @Column({ type: 'longtext' })
@@ -75,7 +78,7 @@ export default class Novel extends BaseEntity {
       .getMany();
   }
 
-  static async findMartialarts8(): Promise<Novel[] | void> {
+  static async findMartialArts8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: 2 })
       .orderBy('novel.cloud', 'DESC')
