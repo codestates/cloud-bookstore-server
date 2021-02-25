@@ -27,6 +27,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-unused-vars': 'off', // 나중에 지우기
+    '@typescript-eslint/no-unused-vars': 'off', // 나중에 지우기
     'no-console': 'error', // 콘솔로그 error 처리
     'semi': ['error', 'always'], // ; 반드시 존재해야 함
     '@typescript-eslint/no-inferrable-types': 'off',
