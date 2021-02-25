@@ -35,4 +35,14 @@ export default class UserHistory extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
+
+  static async findByNovelId(
+    userId: number,
+    novelId: number,
+  ): Promise<UserHistory[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novelComment.userId = : userId', { userId })
+      .where('novelComment.novelId = :novelId', { novelId })
+      .getMany();
+  }
 }
