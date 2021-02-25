@@ -10,11 +10,6 @@
       "lint": "eslint src/**/*.ts",
       "fix": "eslint src/**/*.ts --fix"
    },
-   "husky": {
-      "hooks": {
-         "pre-commit": "npm run lint"
-      }
-   },
    "dependencies": {
       "@types/body-parser": "^1.19.0",
       "@types/cookie-parser": "^1.4.2",
