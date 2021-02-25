@@ -83,7 +83,7 @@ export default class Novel extends BaseEntity {
       .getMany();
   }
 
-  static async findRomanc8(): Promise<Novel[] | void> {
+  static async findRomance8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: 3 })
       .orderBy('novel.cloud', 'DESC')

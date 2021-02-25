@@ -16,7 +16,7 @@ router.get('/category/:id', controllers.category);
 router.get('/novel/:novelId', controllers.getNovel);
 
 // * https://server.cloud-bookstore.com/novel/like/:novelId
-router.post('/novel/like/:novelId', controllers.likeNovel);
+router.get('/novel/like/:novelId', controllers.likeNovel);
 
 // * https://server.cloud-bookstore.com/novel/comment
 router.post('/novel/comment', controllers.commentNovel);
