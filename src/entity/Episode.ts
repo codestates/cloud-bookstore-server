@@ -6,13 +6,14 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
-import { Purchase } from './Purchase';
-import { Novel } from './Novel';
+import Purchase from './Purchase';
+import Novel from './Novel';
 
 @Entity()
-export class Episode {
+export default class Episode extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -45,7 +46,7 @@ export class Episode {
 
   @ManyToOne((type) => Novel, (novel) => novel.episodes, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   novel!: Novel;
 }

@@ -5,12 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
-import { User } from './User';
+import User from './User';
 
 @Entity()
-export class UserHistory {
+export default class UserHistory extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -31,7 +32,7 @@ export class UserHistory {
 
   @ManyToOne((type) => User, (user) => user.userHistories, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
 }

@@ -5,12 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
-import { User } from './User';
+import User from './User';
 
 @Entity()
-export class UserLike {
+export default class UserLike extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -28,7 +29,7 @@ export class UserLike {
 
   @ManyToOne((type) => User, (user) => user.userLikes, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
 }

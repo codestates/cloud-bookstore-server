@@ -5,16 +5,17 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BaseEntity,
 } from 'typeorm';
 
-import { UserHistory } from './UserHistory';
-import { UserWork } from './UserWork';
-import { UserLike } from './UserLike';
-import { CloudHistory } from './CloudHistory';
-import { Purchase } from './Purchase';
+import UserHistory from './UserHistory';
+import UserWork from './UserWork';
+import UserLike from './UserLike';
+import CloudHistory from './CloudHistory';
+import Purchase from './Purchase';
 
 @Entity()
-export class User {
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
