@@ -10,6 +10,7 @@ import {
 
 import NovelComment from './NovelComment';
 import Episode from './Episode';
+import { timingSafeEqual } from 'crypto';
 
 @Entity()
 export default class Novel extends BaseEntity {
@@ -51,4 +52,10 @@ export default class Novel extends BaseEntity {
 
   @OneToMany((type) => Episode, (episodes) => episodes.novel)
   episodes!: Episode[];
+
+  static async findByCategory(id: number): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: id })
+      .getMany();
+  }
 }
