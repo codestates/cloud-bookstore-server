@@ -49,4 +49,10 @@ export default class Episode extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   novel!: Novel;
+
+  static async findByNovelId(novelId: number): Promise<Episode[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('episode.novelId = :novelId', { novelId })
+      .getMany();
+  }
 }
