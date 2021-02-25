@@ -37,9 +37,9 @@ export default class UserLike extends BaseEntity {
     userId: number,
     novelId: number,
   ): Promise<UserLike | void> {
-    return await this.createQueryBuilder('novel')
-      .where('userLike.userId = : userId', { userId })
-      .where('userLike.novelId = :novelId', { novelId })
+    return await this.createQueryBuilder('userLike')
+      .where('userLike.userId = :userId', { userId })
+      .andWhere('userLike.novelId = :novelId', { novelId })
       .getOne();
   }
 }

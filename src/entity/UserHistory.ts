@@ -40,9 +40,11 @@ export default class UserHistory extends BaseEntity {
     userId: number,
     novelId: number,
   ): Promise<UserHistory[] | void> {
-    return await this.createQueryBuilder('novel')
-      .where('novelComment.userId = : userId', { userId })
-      .where('novelComment.novelId = :novelId', { novelId })
+    return await this.createQueryBuilder('userHistory')
+      .where('userHistory.userId = :userId', { userId })
+      .andWhere('userHistory.novelId = :novelId', { novelId })
+      .select('userHistory.novelEpisodeId')
+      .addSelect('userHistory.updatedAt')
       .getMany();
   }
 }

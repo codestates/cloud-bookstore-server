@@ -37,7 +37,7 @@ export default class NovelComment extends BaseEntity {
   novel!: Novel;
 
   static async findByNovelId(novelId: number): Promise<NovelComment[] | void> {
-    return await this.createQueryBuilder('novel')
+    return await this.createQueryBuilder('novelComment')
       .where('novelComment.novelId = :novelId', { novelId })
       .getMany();
   }
