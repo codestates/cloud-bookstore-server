@@ -78,7 +78,7 @@ export default class Novel extends BaseEntity {
       .getMany();
   }
 
-  static async findMartialarts8(): Promise<Novel[] | void> {
+  static async findMartialArts8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: 2 })
       .orderBy('novel.cloud', 'DESC')
@@ -86,7 +86,7 @@ export default class Novel extends BaseEntity {
       .getMany();
   }
 
-  static async findRomanc8(): Promise<Novel[] | void> {
+  static async findRomance8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: 3 })
       .orderBy('novel.cloud', 'DESC')
@@ -97,6 +97,24 @@ export default class Novel extends BaseEntity {
   static async findByNovelId(novelId: number): Promise<Novel | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.id = :id', { id: novelId })
+      .getOne();
+  }
+
+  static async likeNovel(novelId: number): Promise<Novel | void> {
+    await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        userLike: () => 'userLike + 1',
+      })
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .execute();
+    return await this.createQueryBuilder('novel')
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .select('novel.userLike')
       .getOne();
   }
 }
