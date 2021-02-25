@@ -62,7 +62,7 @@ export default class Novel extends BaseEntity {
       .where('novel.category = :category', { category: id })
       .getMany();
   }
-  
+
   static async findRanking8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .orderBy('novel.cloud', 'DESC')
@@ -93,10 +93,28 @@ export default class Novel extends BaseEntity {
       .take(8)
       .getMany();
   }
-  
+
   static async findByNovelId(novelId: number): Promise<Novel | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.id = :id', { id: novelId })
+      .getOne();
+  }
+
+  static async likeNovel(novelId: number): Promise<Novel | void> {
+    await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        userLike: () => 'userLike + 1',
+      })
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .execute();
+    return await this.createQueryBuilder('novel')
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .select('novel.userLike')
       .getOne();
   }
 }
