@@ -47,14 +47,15 @@ export default class Purchase extends BaseEntity {
     userId: number,
     novelId: number,
   ): Promise<Purchase[] | void> {
-    return await this.createQueryBuilder('novel')
+    return await this.createQueryBuilder('purchase')
       .innerJoinAndSelect(
         'purchase.episode',
         'episode',
         'episode.novelId = :novelId',
         { novelId },
       )
-      .where('purchase.userId = : userId', { userId })
+      .where('purchase.userId = :userId', { userId })
+      .select('purchase.episodeId')
       .getMany();
   }
 }
