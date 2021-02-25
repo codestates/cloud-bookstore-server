@@ -5,13 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
-import { User } from './User';
-import { Episode } from './Episode';
+import User from './User';
+import Episode from './Episode';
 
 @Entity()
-export class Purchase {
+export default class Purchase extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -32,13 +33,13 @@ export class Purchase {
 
   @ManyToOne((type) => User, (user) => user.purchases, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
 
   @ManyToOne((type) => Episode, (episode) => episode.purchases, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   episode!: Episode;
 }

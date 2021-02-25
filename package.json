@@ -4,7 +4,7 @@
    "description": "",
    "main": "index.js",
    "scripts": {
-      "start": "ts-node src/index.ts",
+      "start": "nodemon src/index.ts",
       "compile": "tsc",
       "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run compile\"",
       "lint": "eslint src/**/*.ts",

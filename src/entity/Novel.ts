@@ -5,13 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BaseEntity,
 } from 'typeorm';
 
-import { NovelComment } from './NovelComment';
-import { Episode } from './Episode';
+import NovelComment from './NovelComment';
+import Episode from './Episode';
 
 @Entity()
-export class Novel {
+export default class Novel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

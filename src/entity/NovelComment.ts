@@ -5,12 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
-import { Novel } from './Novel';
+import Novel from './Novel';
 
 @Entity()
-export class NovelComment {
+export default class NovelComment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -31,7 +32,7 @@ export class NovelComment {
 
   @ManyToOne((type) => Novel, (novel) => novel.novelComments, {
     nullable: false,
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   novel!: Novel;
 }

@@ -34,8 +34,13 @@ app.use(
     credentials: true,
   }),
 );
+import Novel from '../src/entity/Novel';
 
-app.get('/', (req: Request, res: Response) => res.status(200).send('구름책방'));
+app.get('/', async (req: Request, res: Response) => {
+  const novel = await Novel.findOne({ id: 3 });
+  console.log(novel);
+  res.status(200).send(novel);
+});
 
 //Handle Error
 app.use((err: Error, req: Request, res: Response) => {
