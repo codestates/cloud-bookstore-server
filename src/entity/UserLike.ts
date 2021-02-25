@@ -32,4 +32,14 @@ export default class UserLike extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
+
+  static async findByNovelId(
+    userId: number,
+    novelId: number,
+  ): Promise<UserLike | void> {
+    return await this.createQueryBuilder('novel')
+      .where('userLike.userId = : userId', { userId })
+      .where('userLike.novelId = :novelId', { novelId })
+      .getOne();
+  }
 }

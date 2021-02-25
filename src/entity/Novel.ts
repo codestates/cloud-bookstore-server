@@ -58,4 +58,42 @@ export default class Novel extends BaseEntity {
       .where('novel.category = :category', { category: id })
       .getMany();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  static async findByNovelId(novelId: number): Promise<Novel | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.id = :id', { id: novelId })
+      .getOne();
+  }
 }

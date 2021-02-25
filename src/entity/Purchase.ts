@@ -42,4 +42,19 @@ export default class Purchase extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   episode!: Episode;
+
+  static async findByNovelId(
+    userId: number,
+    novelId: number,
+  ): Promise<Purchase[] | void> {
+    return await this.createQueryBuilder('novel')
+      .innerJoinAndSelect(
+        'purchase.episode',
+        'episode',
+        'episode.novelId = :novelId',
+        { novelId },
+      )
+      .where('purchase.userId = : userId', { userId })
+      .getMany();
+  }
 }
