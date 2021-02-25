@@ -51,4 +51,10 @@ export default class Novel extends BaseEntity {
 
   @OneToMany((type) => Episode, (episodes) => episodes.novel)
   episodes!: Episode[];
+
+  static async findRanking(): Promise<Novel[]> {
+    return await this.createQueryBuilder('novel')
+      .orderBy('novel.cloud', 'ASC')
+      .getMany();
+  }
 }
