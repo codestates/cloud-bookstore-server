@@ -10,6 +10,7 @@ import {
 
 import NovelComment from './NovelComment';
 import Episode from './Episode';
+import { timingSafeEqual } from 'crypto';
 
 @Entity()
 export default class Novel extends BaseEntity {
@@ -52,9 +53,15 @@ export default class Novel extends BaseEntity {
   @OneToMany((type) => Episode, (episodes) => episodes.novel)
   episodes!: Episode[];
 
-  static async findRanking(): Promise<Novel[]> {
+  static findByCategory(id: number): Promise<Novel[] | void> {
+    return this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: id })
+      .getMany();
+  }
+
+  static async findRanking(id: number): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
-      .orderBy('novel.cloud', 'ASC')
+      .where('novel.category = :category', { category: id })
       .getMany();
   }
 }
