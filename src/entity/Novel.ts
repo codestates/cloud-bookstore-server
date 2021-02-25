@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
   BaseEntity,
+  TableForeignKey,
 } from 'typeorm';
 
 import NovelComment from './NovelComment';
@@ -56,6 +57,37 @@ export default class Novel extends BaseEntity {
   static async findByCategory(id: number): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: id })
+      .getMany();
+  }
+
+  static async findRanking8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findFantasy8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 1 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findMartialarts8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 2 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findRomanc8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 3 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
       .getMany();
   }
 }
