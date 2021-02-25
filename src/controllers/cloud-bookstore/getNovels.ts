@@ -1,15 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import Novel from '../../entity/Novel';
 
-export default async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): Promise<void> => {
+export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const ranking = await Novel.findOne({ id: 1 });
-    res.status(200).send({ ranking });
+    const ranking = await Novel.findRanking8();
+    const fantasy = await Novel.findFantasy8();
+    const martialArts = await Novel.findMartialarts8();
+    const romance = await Novel.findRomanc8();
+
+    res.status(200).send({ ranking, fantasy, martialArts, romance });
   } catch (err) {
-    next(err);
+    res.status(500).send(err);
   }
 };

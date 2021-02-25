@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
   BaseEntity,
+  TableForeignKey,
 } from 'typeorm';
 
 import NovelComment from './NovelComment';
@@ -53,15 +54,40 @@ export default class Novel extends BaseEntity {
   @OneToMany((type) => Episode, (episodes) => episodes.novel)
   episodes!: Episode[];
 
-  static findByCategory(id: number): Promise<Novel[] | void> {
-    return this.createQueryBuilder('novel')
+  static async findByCategory(id: number): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
       .where('novel.category = :category', { category: id })
       .getMany();
   }
 
-  static async findRanking(id: number): Promise<Novel[] | void> {
+  static async findRanking8(): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
-      .where('novel.category = :category', { category: id })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findFantasy8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 1 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findMartialarts8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 2 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
+      .getMany();
+  }
+
+  static async findRomanc8(): Promise<Novel[] | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.category = :category', { category: 3 })
+      .orderBy('novel.cloud', 'DESC')
+      .take(8)
       .getMany();
   }
 }
