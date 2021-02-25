@@ -4,7 +4,7 @@
          "es5",
          "es6"
       ],
-      "target": "es5",
+      "target": "es6",
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./dist",
@@ -16,6 +16,6 @@
       "skipLibCheck": true,           
       "forceConsistentCasingInFileNames": true
    },
-   "include": ["./src/**/*.ts", "./typORM/**/*.ts"],
+   "include": ["/**/*.ts", "ormconfig.ts"],
    "exclude": ["./dist", "node_modules"]
 }
