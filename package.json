@@ -10,11 +10,6 @@
       "lint": "eslint src/**/*.ts",
       "fix": "eslint src/**/*.ts --fix"
    },
-   "husky": {
-      "hooks": {
-         "pre-commit": "npm run lint"
-      }
-   },
    "dependencies": {
       "@types/body-parser": "^1.19.0",
       "@types/cookie-parser": "^1.4.2",
@@ -24,10 +19,16 @@
       "@types/sha256": "^0.2.0",
       "@typescript-eslint/eslint-plugin": "^4.15.1",
       "@typescript-eslint/parser": "^4.15.1",
+      "body-parser": "^1.19.0",
+      "cookie-parser": "^1.4.5",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
       "mysql": "^2.14.1",
       "nodemon": "^2.0.7",
       "reflect-metadata": "^0.1.10",
       "sequelize-typescript": "^2.1.0",
+      "sha256": "^0.2.0",
       "ts-node": "^9.1.1",
       "typeorm": "0.2.31"
    },
@@ -39,7 +40,7 @@
       "husky": "^5.0.9",
       "prettier": "^2.2.1",
       "sequelize-cli-typescript": "^3.2.0-c",
-      "typescript": "3.3.3333",
-      "ts-node": "3.3.0"
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
    }
 }
