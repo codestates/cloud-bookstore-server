@@ -22,7 +22,7 @@ router.get('/novel/like/:novelId', controllers.likeNovel);
 router.post('/novel/comment', controllers.commentNovel);
 
 // * https://server.cloud-bookstore.com/novel/comment/edit
-router.patch('novel/comment/edit', controllers.editNovelComment);
+router.patch('/novel/comment/edit', controllers.editNovelComment);
 
 // * https://server.cloud-bookstore.com/novel/comment/delete/:novelId/:commentId
 router.delete(

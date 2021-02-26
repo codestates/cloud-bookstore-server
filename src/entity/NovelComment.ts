@@ -53,4 +53,14 @@ export default class NovelComment extends BaseEntity {
       .values({ novelId, nickname, comment })
       .execute();
   }
+
+  static async editComment(commentId: number, comment: string) {
+    return await this.createQueryBuilder('novelComment')
+      .update(NovelComment)
+      .set({
+        comment,
+      })
+      .where('id = :id', { id: commentId })
+      .execute();
+  }
 }
