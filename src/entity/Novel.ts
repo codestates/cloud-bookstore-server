@@ -42,7 +42,7 @@ export default class Novel extends BaseEntity {
   @Column()
   complete!: boolean;
 
-  @Column({ type: 'longtext' })
+  @Column()
   thumbnail!: string;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -136,5 +136,15 @@ export default class Novel extends BaseEntity {
     return await this.createQueryBuilder('novel')
       .where('novel.author = :author', { author })
       .getMany();
+  }
+
+  static async countEpisode(novelId: number) {
+    return await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        episodeCount: () => 'episodeCount + 1',
+      })
+      .where('novel.id = :id', { id: novelId })
+      .execute();
   }
 }
