@@ -43,6 +43,7 @@ export default class CloudHistory extends BaseEntity {
   user!: User;
 
   static async updateEpisodeCloud(
+    // 회차 하나 당 구름 1씩 차감
     userId: number,
     novelId: number,
     episodeId: number,
@@ -54,9 +55,15 @@ export default class CloudHistory extends BaseEntity {
         userId,
         novelId,
         novelEpisodeId: episodeId,
-        cloud: 1,
+        cloud: -1,
         purchase: false,
       })
       .execute();
+  }
+
+  static async getCloudHistories(userId: number): Promise<CloudHistory[]> {
+    return await this.createQueryBuilder('cloudHistory')
+      .where('cloudHistory.userId = :userId', { userId })
+      .getMany();
   }
 }

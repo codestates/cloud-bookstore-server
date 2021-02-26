@@ -11,7 +11,8 @@ import mypage from './mypage';
 import writeNovel from './writeNovel';
 import writeEpisode from './writeEpisode';
 import getMyNovel from './getMyNovel';
-import getCloudHistory from './getCloudHistory';
+import getAccumulatedCloudHistory from './getAccumulatedCloudHistory';
+import getDeductedCloudHistory from './getDeductedCloudHistory';
 import editNickname from './editNickname';
 
 export {
@@ -28,6 +29,7 @@ export {
   writeNovel,
   writeEpisode,
   getMyNovel,
-  getCloudHistory,
+  getAccumulatedCloudHistory,
+  getDeductedCloudHistory,
   editNickname,
 };
