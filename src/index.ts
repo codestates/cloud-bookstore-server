@@ -29,12 +29,12 @@ app.use(
       'https://cloud-bookstore.com',
       'https://www.cloud-bookstore.com',
       'https://server.cloud-bookstore.com',
+      'http://localhost:3000',
     ],
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
     credentials: true,
   }),
 );
-import Novel from '../src/entity/Novel';
 
 app.get('/', async (req: Request, res: Response) => {
   res.status(200).send();
