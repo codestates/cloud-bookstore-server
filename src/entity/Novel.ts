@@ -132,9 +132,9 @@ export default class Novel extends BaseEntity {
       .execute();
   }
 
-  static async findAllNovelsByUser(nickname: string): Promise<Novel[] | void> {
+  static async findAllNovelsByUser(author: string): Promise<Novel[] | void> {
     return await this.createQueryBuilder('novel')
-      .where('novel.author = :author', { author: nickname })
+      .where('novel.author = :author', { author })
       .getMany();
   }
 }
