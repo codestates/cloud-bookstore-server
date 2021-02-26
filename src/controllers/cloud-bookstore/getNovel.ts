@@ -8,7 +8,7 @@ import Purchase from '../../entity/Purchase';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId: number = req.cookies.userId;
+    const userId: number = +req.cookies.userId;
     const novelId: number = Number(req.params.novelId);
 
     const data = await Novel.findByNovelId(novelId);

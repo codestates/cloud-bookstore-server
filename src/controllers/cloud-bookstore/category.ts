@@ -3,7 +3,7 @@ import Novel from '../../entity/Novel';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const id: number = Number(req.params.id);
+    const id: number = +req.params.id;
 
     const data = await Novel.findByCategory(id);
 

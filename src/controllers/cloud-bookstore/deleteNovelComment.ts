@@ -4,8 +4,8 @@ import NovelComment from '../../entity/NovelComment';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const novelId: number = Number(req.params.novelId);
-    const commentId: number = Number(req.params.commentId);
+    const novelId: number = +req.params.novelId;
+    const commentId: number = +req.params.commentId;
 
     const comments = await NovelComment.deleteComment(commentId).then(() =>
       NovelComment.findByNovelId(novelId),
