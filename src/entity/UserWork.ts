@@ -32,4 +32,18 @@ export default class UserWork extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
+
+  static async saveMyNovel(userId: number, novelId: number) {
+    return await this.createQueryBuilder('userWork')
+      .insert()
+      .into(UserWork)
+      .values({ userId, novelId })
+      .execute();
+  }
+
+  static async getMyNovelList(userId: number): Promise<UserWork[] | void> {
+    return await this.createQueryBuilder('userWork')
+      .where('userWork.id = :id', { id: userId })
+      .getMany();
+  }
 }
