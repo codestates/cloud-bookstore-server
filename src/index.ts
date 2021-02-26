@@ -21,24 +21,19 @@ app.use(cookieParser());
 app.use(json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/', router);
-
 app.use(
   cors({
-    origin: [
-      'https://cloud-bookstore.com',
-      'https://www.cloud-bookstore.com',
-      'https://server.cloud-bookstore.com',
-      'http://localhost:3000',
-    ],
+    origin: ['https://cloud-bookstore.com', 'https://www.cloud-bookstore.com'],
     methods: ['GET', 'POST', 'OPTIONS', 'PATCH', 'DELETE'],
     credentials: true,
   }),
 );
 
-app.get('/', async (req: Request, res: Response) => {
-  res.status(200).send();
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).send('구름책방');
 });
+
+app.use('/', router);
 
 //Handle Error
 app.use((err: Error, req: Request, res: Response) => {
