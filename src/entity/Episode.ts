@@ -29,7 +29,7 @@ export default class Episode extends BaseEntity {
   @Column({ type: 'text' })
   text!: string;
 
-  @Column({ type: 'longtext' })
+  @Column()
   thumbnail!: string;
 
   @Column()
@@ -79,5 +79,19 @@ export default class Episode extends BaseEntity {
       .where('episode.id = :id', { id: episodeId })
       .select('episode.thumbnail')
       .getRawOne();
+  }
+
+  static async writeEpisode(
+    episodeNum: number,
+    novelId: number,
+    title: string,
+    text: string,
+    thumbnail: string,
+  ) {
+    return await this.createQueryBuilder('episode')
+      .insert()
+      .into(Episode)
+      .values({ episodeNum, novelId, title, text, thumbnail })
+      .execute();
   }
 }
