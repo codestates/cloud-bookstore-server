@@ -43,10 +43,7 @@ export default class Purchase extends BaseEntity {
   })
   episode!: Episode;
 
-  static async findByNovelId(
-    userId: number,
-    novelId: number,
-  ): Promise<Purchase[] | void> {
+  static async findByNovelId(userId: number, novelId: number) {
     return await this.createQueryBuilder('purchase')
       .innerJoinAndSelect(
         'purchase.episode',
@@ -56,6 +53,22 @@ export default class Purchase extends BaseEntity {
       )
       .where('purchase.userId = :userId', { userId })
       .select('purchase.episodeId')
-      .getMany();
+      .getRawMany();
+  }
+
+  static async addPurchase(
+    userId: number,
+    episodeId: number,
+    thumbnail: string,
+  ) {
+    return await this.createQueryBuilder('purchase')
+      .insert()
+      .into(Purchase)
+      .values({
+        userId,
+        episodeId,
+        thumbnail,
+      })
+      .execute();
   }
 }

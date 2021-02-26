@@ -41,4 +41,22 @@ export default class CloudHistory extends BaseEntity {
     cascade: ['insert', 'update', 'remove'],
   })
   user!: User;
+
+  static async updateEpisodeCloud(
+    userId: number,
+    novelId: number,
+    episodeId: number,
+  ) {
+    return await this.createQueryBuilder('cloudHistory')
+      .insert()
+      .into(CloudHistory)
+      .values({
+        userId,
+        novelId,
+        novelEpisodeId: episodeId,
+        cloud: 1,
+        purchase: false,
+      })
+      .execute();
+  }
 }

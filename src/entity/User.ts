@@ -48,4 +48,24 @@ export default class User extends BaseEntity {
 
   @OneToMany((type) => Purchase, (purchase) => purchase.user)
   purchases!: Purchase[];
+
+  static async checkCloudBalance(userId: number) {
+    return await this.createQueryBuilder('user')
+      .where('user.id = :id', {
+        id: userId,
+      })
+      .select('user.cloud')
+      .getRawOne();
+  }
+
+  static async cutCloud(userId: number) {
+    // episode를 읽으면, cloud 하나 내리기
+    return await this.createQueryBuilder('user')
+      .update(User)
+      .set({
+        cloud: () => 'cloud - 1',
+      })
+      .where('user.id = :id', { id: userId })
+      .execute();
+  }
 }
