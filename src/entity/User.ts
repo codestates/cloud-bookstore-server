@@ -68,4 +68,13 @@ export default class User extends BaseEntity {
       .where('user.id = :id', { id: userId })
       .execute();
   }
+
+  static async findNickname(userId: number) {
+    return await this.createQueryBuilder('user')
+      .where('user.id = :id', {
+        id: userId,
+      })
+      .select('user.nickname')
+      .getRawOne();
+  }
 }
