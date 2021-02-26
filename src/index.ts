@@ -37,9 +37,7 @@ app.use(
 import Novel from '../src/entity/Novel';
 
 app.get('/', async (req: Request, res: Response) => {
-  const novel = await Novel.findOne({ id: 3 });
-  console.log(novel);
-  res.status(200).send(novel);
+  res.status(200).send();
 });
 
 //Handle Error
