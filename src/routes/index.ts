@@ -26,7 +26,7 @@ router.patch('/novel/comment/edit', controllers.editNovelComment);
 
 // * https://server.cloud-bookstore.com/novel/comment/delete/:novelId/:commentId
 router.delete(
-  'novel/comment/delete/:novelId/:commentId',
+  '/novel/comment/delete/:novelId/:commentId',
   controllers.deleteNovelComment,
 );
 

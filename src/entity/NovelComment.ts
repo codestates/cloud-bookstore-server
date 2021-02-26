@@ -63,4 +63,12 @@ export default class NovelComment extends BaseEntity {
       .where('id = :id', { id: commentId })
       .execute();
   }
+
+  static async deleteComment(commentId: number) {
+    return await this.createQueryBuilder('novelComment')
+      .delete()
+      .from(NovelComment)
+      .where('id = :id', { id: commentId })
+      .execute();
+  }
 }
