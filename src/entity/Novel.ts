@@ -6,12 +6,10 @@ import {
   UpdateDateColumn,
   OneToMany,
   BaseEntity,
-  TableForeignKey,
 } from 'typeorm';
 
 import NovelComment from './NovelComment';
 import Episode from './Episode';
-import { timingSafeEqual } from 'crypto';
 
 @Entity()
 export default class Novel extends BaseEntity {
@@ -23,6 +21,9 @@ export default class Novel extends BaseEntity {
 
   @Column()
   author!: string;
+
+  @Column()
+  userId!: number;
 
   @Column()
   category!: number;
@@ -145,6 +146,21 @@ export default class Novel extends BaseEntity {
         episodeCount: () => 'episodeCount + 1',
       })
       .where('novel.id = :id', { id: novelId })
+      .execute();
+  }
+
+  static async editNickname(
+    originalAuthorName: string,
+    updatedAuthorName: string,
+  ) {
+    return await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        author: updatedAuthorName,
+      })
+      .where('novel.author = :author', {
+        author: originalAuthorName,
+      })
       .execute();
   }
 }

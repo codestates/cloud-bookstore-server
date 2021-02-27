@@ -77,4 +77,18 @@ export default class User extends BaseEntity {
       .select('user.nickname')
       .getRawOne();
   }
+
+  static async checkNicknameAvailability(nickname: string) {
+    return await this.createQueryBuilder('user')
+      .where('user.nickname = :nickname', { nickname })
+      .getOne();
+  }
+
+  static async editNickname(userId: number, nickname: string) {
+    return await this.createQueryBuilder('user')
+      .update(User)
+      .set({ nickname })
+      .where('user.id = :id', { id: userId })
+      .execute();
+  }
 }
