@@ -45,9 +45,9 @@ router.post('/mypage/write/episode', controllers.writeEpisode);
 // * https://server.cloud-bookstore.com/mypage/novel/:novelId
 router.get('/mypage/novel/:novelId', controllers.getMyNovel);
 
-// * https://server.cloud-bookstore.com/setting/cloudhistory/accumulate
+// * https://server.cloud-bookstore.com/setting/cloudhistory/accumulation
 router.get(
-  '/setting/cloudhistory/accumulate',
+  '/setting/cloudhistory/accumulation',
   controllers.getAccumulatedCloudHistory,
 );
 
@@ -59,5 +59,17 @@ router.get(
 
 // * https://server.cloud-bookstore.com/setting/nickname
 router.patch('/setting/nickname', controllers.editNickname);
+
+// * https://server.cloud-bookstore.com/setting/cloudhistory/accumulation/calendar
+router.post(
+  '/setting/cloudhistory/accumulation/calendar',
+  controllers.accumulatedCloudCalendar,
+);
+
+// * https://server.cloud-bookstore.com/setting/cloudhistory/deduction/calendar
+router.post(
+  '/setting/cloudhistory/deduction/calendar',
+  controllers.deductedCloudCalendar,
+);
 
 export default router;
