@@ -48,7 +48,7 @@ export default class UserHistory extends BaseEntity {
       .addSelect('userHistory.updatedAt')
       .getMany();
   }
-
+  
   static async findAllMyEpisode(userId: number): Promise<UserHistory[]> {
     return await this.createQueryBuilder('userHistory')
       .where('userHistory.userId = :userId', { userId })
@@ -56,6 +56,7 @@ export default class UserHistory extends BaseEntity {
       .addSelect('userHistory.novelEpisodeId')
       .getMany();
   }
+  
   static async addHistory(userId: number, novelId: number, episodeId: number) {
     return await this.createQueryBuilder('userHistory')
       .insert()
