@@ -4,6 +4,7 @@ import Episode from '../../entity/Episode';
 import User from '../../entity/User';
 import CloudHistory from '../../entity/CloudHistory';
 import Purchase from '../../entity/Purchase';
+import UserHistory from '../../entity/UserHistory';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
@@ -22,6 +23,7 @@ export default async (req: Request, res: Response): Promise<void> => {
           );
       } else {
         // 사용자가 아직 사용할 수 있는 cloud가 있을 때
+        await UserHistory.addHistory(userId, novelId, episodeId);
         await Purchase.findByNovelId(userId, novelId).then(
           async (purchased) => {
             await Promise.all(
