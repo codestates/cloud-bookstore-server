@@ -101,6 +101,13 @@ export default class Novel extends BaseEntity {
       .getOne();
   }
 
+  static async findByNovelIdTitleOnly(novelId: number): Promise<Novel | void> {
+    return await this.createQueryBuilder('novel')
+      .where('novel.id = :id', { id: novelId })
+      .select('novel.title')
+      .getOne();
+  }
+
   static async findByNovelHis(novelId: number): Promise<Novel | void> {
     return await this.createQueryBuilder('novel')
       .where('novel.id = :id', { id: novelId })

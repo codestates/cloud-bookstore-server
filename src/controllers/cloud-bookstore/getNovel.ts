@@ -9,39 +9,44 @@ import Purchase from '../../entity/Purchase';
 export default async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: number = +req.cookies.userId;
-    const novelId: number = Number(req.params.novelId);
+    const novelId: number = +req.params.novelId;
 
-    const data = await Novel.findByNovelId(novelId);
-    const episodes = await Episode.findByNovelId(novelId);
-    const comments = await NovelComment.findByNovelId(novelId);
-    const userHistory = await UserHistory.findByNovelId(userId, novelId);
-    const userLike = await UserLike.findByNovelId(userId, novelId);
-    const userPurchases = await Purchase.findByNovelId(userId, novelId);
-
-    if (userId && userLike) {
+    if (!userId) {
+      const data = await Novel.findByNovelId(novelId);
+      const episodes = await Episode.findByNovelId(novelId);
+      const comments = await NovelComment.findByNovelId(novelId);
       res.status(200).send({
         data,
         episodes,
         comments,
-        userHistory,
-        userLike: true,
-        userPurchases,
-      });
-    } else if (userId && !userLike) {
-      res.status(200).send({
-        data,
-        episodes,
-        comments,
-        userHistory,
-        userLike: false,
-        userPurchases,
       });
     } else {
-      res.status(200).send({
-        data,
-        episodes,
-        comments,
-      });
+      const data = await Novel.findByNovelId(novelId);
+      const episodes = await Episode.findByNovelId(novelId);
+      const comments = await NovelComment.findByNovelId(novelId);
+      const userHistory = await UserHistory.findByNovelId(userId, novelId);
+      const userLike = await UserLike.findByNovelId(userId, novelId);
+      const userPurchases = await Purchase.findByNovelId(userId, novelId);
+
+      if (userId && userLike) {
+        res.status(200).send({
+          data,
+          episodes,
+          comments,
+          userHistory,
+          userLike: true,
+          userPurchases,
+        });
+      } else if (userId && !userLike) {
+        res.status(200).send({
+          data,
+          episodes,
+          comments,
+          userHistory,
+          userLike: false,
+          userPurchases,
+        });
+      }
     }
   } catch (err) {
     res.status(500).send(err);
