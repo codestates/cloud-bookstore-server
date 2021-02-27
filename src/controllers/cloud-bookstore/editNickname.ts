@@ -4,7 +4,7 @@ import Novel from '../../entity/Novel';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId: number = req.body.userId;
+    const userId: number = +req.cookies.userId;
     const nickname: string = req.body.nickname;
 
     const originalAuthorName = await User.findNickname(userId).then(
