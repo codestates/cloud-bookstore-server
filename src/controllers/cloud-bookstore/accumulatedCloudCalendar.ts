@@ -9,15 +9,14 @@ export default async (req: Request, res: Response): Promise<void> => {
     const data = await CloudHistory.getCloudHistories(userId).then(
       async (histories) =>
         await Promise.all(
-          histories.filter((history) => history.cloud < 0),
+          histories.filter((history) => history.cloud > 0),
         ).then(
-          async (info) => await console.log(String(info[0].updatedAt)),
-          // await Promise.all(
-          //   info.filter(
-          //     (cloudDate) =>
-          //       String(cloudDate.updatedAt).slice(0, 10) === date,
-          //   ),
-          // ),
+          async (info) =>
+            await Promise.all(
+              info.filter(
+                (dates) => dates.updatedAt.toISOString().slice(0, 10) === date,
+              ),
+            ),
         ),
     );
 

@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   BaseEntity,
-  Between,
 } from 'typeorm';
 
 import User from './User';
@@ -65,16 +64,6 @@ export default class CloudHistory extends BaseEntity {
   static async getCloudHistories(userId: number): Promise<CloudHistory[]> {
     return await this.createQueryBuilder('cloudHistory')
       .where('cloudHistory.userId = :userId', { userId })
-      .getMany();
-  }
-
-  static async getCloudHistoriesByDate(
-    userId: number,
-    date: string,
-  ): Promise<CloudHistory[]> {
-    return await this.createQueryBuilder('cloudHistory')
-      .where('cloudHistory.userId = :userId', { userId })
-      .between('cloudHistory.updatedAt'),
       .getMany();
   }
 }
