@@ -94,4 +94,12 @@ export default class Episode extends BaseEntity {
       .values({ episodeNum, novelId, title, text, thumbnail })
       .execute();
   }
+
+  static async findByEpisodeHis(episodeId: number) {
+    return await this.createQueryBuilder('episode')
+      .where('episode.id = :episodeId', { episodeId })
+      .select('episode.id')
+      .addSelect('episode.title')
+      .getOne();
+  }
 }

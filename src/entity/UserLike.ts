@@ -42,4 +42,11 @@ export default class UserLike extends BaseEntity {
       .andWhere('userLike.novelId = :novelId', { novelId })
       .getOne();
   }
+
+  static async findByUserId(userId: number): Promise<UserLike[]> {
+    return await this.createQueryBuilder('userLike')
+      .where('userLike.userId = :userId', { userId })
+      .select('userLike.novelId')
+      .getMany();
+  }
 }
