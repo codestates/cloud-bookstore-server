@@ -7,10 +7,17 @@ export default async (req: Request, res: Response): Promise<void> => {
     const date: string = req.body.date; // `2020-02-27`
 
     const data = await CloudHistory.getCloudHistories(userId).then(
-      (histories) => console.log(histories),
-      // await Promise.all(
-      //   histories.filter((history) => history.cloud < 0),
-      // ).then((data) => data.filter((cloudDate) => console.log(cloudDate))),
+      async (histories) =>
+        await Promise.all(
+          histories.filter((history) => history.cloud < 0),
+        ).then(
+          async (info) =>
+            await Promise.all(
+              info.filter(
+                (dates) => dates.updatedAt.toISOString().slice(0, 10) === date,
+              ),
+            ),
+        ),
     );
 
     res.status(200).send({ data });
