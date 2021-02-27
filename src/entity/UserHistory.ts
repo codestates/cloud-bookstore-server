@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import User from './User';
+import Novel from './Novel';
 
 @Entity()
 export default class UserHistory extends BaseEntity {
@@ -48,7 +49,7 @@ export default class UserHistory extends BaseEntity {
       .getMany();
   }
 
-  static async findAllMyEpisode(userId: number): Promise<UserHistory[] | void> {
+  static async findAllMyEpisode(userId: number): Promise<UserHistory[]> {
     return await this.createQueryBuilder('userHistory')
       .where('userHistory.userId = :userId', { userId })
       .select('userHistory.novelId')

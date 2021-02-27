@@ -41,7 +41,7 @@ export default class UserWork extends BaseEntity {
       .execute();
   }
 
-  static async getMyNovelList(userId: number): Promise<UserWork[] | void> {
+  static async getMyNovelList(userId: number): Promise<UserWork[]> {
     return await this.createQueryBuilder('userWork')
       .where('userWork.id = :id', { id: userId })
       .getMany();
