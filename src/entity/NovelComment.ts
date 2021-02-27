@@ -15,7 +15,7 @@ export default class NovelComment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ nullable: false })
   nickname!: string;
 
   @Column()
@@ -40,6 +40,16 @@ export default class NovelComment extends BaseEntity {
     return await this.createQueryBuilder('novelComment')
       .where('novelComment.novelId = :novelId', { novelId })
       .getMany();
+  }
+
+  static async checkValidity(
+    nickname: string,
+    commentId: number,
+  ): Promise<NovelComment | void> {
+    return await this.createQueryBuilder('novelComment')
+      .where('novelComment.nickname = :nickname', { nickname })
+      .andWhere('novelComment.id = :id', { id: commentId })
+      .getOne();
   }
 
   static async commentNovel(

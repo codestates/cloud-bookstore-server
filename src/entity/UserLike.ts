@@ -49,4 +49,15 @@ export default class UserLike extends BaseEntity {
       .select('userLike.novelId')
       .getMany();
   }
+
+  static async addLikes(userId: number, novelId: number) {
+    return await this.createQueryBuilder('userLike')
+      .insert()
+      .into(UserLike)
+      .values({
+        userId,
+        novelId,
+      })
+      .execute();
+  }
 }

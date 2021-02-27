@@ -78,7 +78,9 @@ export default class User extends BaseEntity {
       .getRawOne();
   }
 
-  static async checkNicknameAvailability(nickname: string) {
+  static async checkNicknameAvailability(
+    nickname: string,
+  ): Promise<User | void> {
     return await this.createQueryBuilder('user')
       .where('user.nickname = :nickname', { nickname })
       .getOne();
