@@ -47,4 +47,16 @@ export default class UserHistory extends BaseEntity {
       .addSelect('userHistory.updatedAt')
       .getMany();
   }
+
+  static async addHistory(userId: number, novelId: number, episodeId: number) {
+    return await this.createQueryBuilder('userHistory')
+      .insert()
+      .into(UserHistory)
+      .values({
+        userId,
+        novelId,
+        novelEpisodeId: episodeId,
+      })
+      .execute();
+  }
 }
