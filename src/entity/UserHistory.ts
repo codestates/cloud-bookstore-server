@@ -47,4 +47,12 @@ export default class UserHistory extends BaseEntity {
       .addSelect('userHistory.updatedAt')
       .getMany();
   }
+
+  static async findAllMyEpisode(userId: number): Promise<UserHistory[] | void> {
+    return await this.createQueryBuilder('userHistory')
+      .where('userHistory.userId = :userId', { userId })
+      .select('userHistory.novelId')
+      .addSelect('userHistory.novelEpisodeId')
+      .getMany();
+  }
 }
