@@ -5,7 +5,7 @@ import User from '../../entity/User';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
-    const userId: number = req.body.userId; // const userId = req.cookies.userId
+    const userId: number = +req.cookies.userId;
     const title: string = req.body.title;
     const category: number = req.body.category;
     const description: string = req.body.description;
@@ -15,7 +15,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       (user) => user.user_nickname,
     );
 
-    const data = await Novel.writeNovel(
+    const novels = await Novel.writeNovel(
       title,
       author,
       category,
@@ -25,7 +25,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       .then((data) => UserWork.saveMyNovel(userId, data.identifiers[0].id))
       .then(() => Novel.findAllNovelsByUser(author));
 
-    res.status(200).send({ data });
+    res.status(200).send({ novels });
   } catch (err) {
     res.status(500).send(err);
   }

@@ -15,7 +15,7 @@ export default class NovelComment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: false })
+  @Column()
   nickname!: string;
 
   @Column()
@@ -79,6 +79,18 @@ export default class NovelComment extends BaseEntity {
       .delete()
       .from(NovelComment)
       .where('id = :id', { id: commentId })
+      .execute();
+  }
+
+  static async editNickname(originalAuthorName: string, nickname: string) {
+    return await this.createQueryBuilder('novelComment')
+      .update(NovelComment)
+      .set({
+        nickname: nickname,
+      })
+      .where('nickname = :nickname', {
+        nickname: originalAuthorName,
+      })
       .execute();
   }
 }

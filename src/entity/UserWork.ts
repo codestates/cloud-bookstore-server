@@ -43,7 +43,7 @@ export default class UserWork extends BaseEntity {
 
   static async getMyNovelList(userId: number): Promise<UserWork[]> {
     return await this.createQueryBuilder('userWork')
-      .where('userWork.id = :id', { id: userId })
+      .where('userWork.userId = :userId', { userId })
       .getMany();
   }
 }

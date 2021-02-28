@@ -57,19 +57,19 @@ router.get(
   controllers.getDeductedCloudHistory,
 );
 
-// * https://server.cloud-bookstore.com/setting/nickname
-router.patch('/setting/nickname', controllers.editNickname);
-
-// * https://server.cloud-bookstore.com/setting/cloudhistory/accumulation/calendar
-router.post(
-  '/setting/cloudhistory/accumulation/calendar',
+// * https://server.cloud-bookstore.com/setting/cloudhistory/accumulation/calendar/:date
+router.get(
+  '/setting/cloudhistory/accumulation/calendar/:date',
   controllers.accumulatedCloudCalendar,
 );
 
-// * https://server.cloud-bookstore.com/setting/cloudhistory/deduction/calendar
-router.post(
-  '/setting/cloudhistory/deduction/calendar',
+// * https://server.cloud-bookstore.com/setting/cloudhistory/deduction/calendar/:date
+router.get(
+  '/setting/cloudhistory/deduction/calendar/:date',
   controllers.deductedCloudCalendar,
 );
+
+// * https://server.cloud-bookstore.com/setting/nickname
+router.patch('/setting/nickname', controllers.editNickname);
 
 export default router;

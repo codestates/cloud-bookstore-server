@@ -26,8 +26,10 @@ export default async (req: Request, res: Response): Promise<void> => {
         }),
       );
       const works = await UserWork.getMyNovelList(userId);
+      console.log(works);
       const userWorks = await Promise.all(
         works.map(async (ele) => {
+          console.log(ele);
           return await Novel.findByNovelId(ele.novelId);
         }),
       );

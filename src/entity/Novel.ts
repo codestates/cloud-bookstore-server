@@ -23,9 +23,6 @@ export default class Novel extends BaseEntity {
   author!: string;
 
   @Column()
-  userId!: number;
-
-  @Column()
   category!: number;
 
   @Column()
