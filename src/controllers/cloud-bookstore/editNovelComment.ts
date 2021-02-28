@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import NovelComment from '../../entity/NovelComment';
 import User from '../../entity/User';
 
-// !userid 보내기!
 export default async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: number = +req.cookies.userId;

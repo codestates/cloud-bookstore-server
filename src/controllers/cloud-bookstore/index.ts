@@ -13,9 +13,10 @@ import writeEpisode from './writeEpisode';
 import getMyNovel from './getMyNovel';
 import getAccumulatedCloudHistory from './getAccumulatedCloudHistory';
 import getDeductedCloudHistory from './getDeductedCloudHistory';
-import editNickname from './editNickname';
 import accumulatedCloudCalendar from './accumulatedCloudCalendar';
 import deductedCloudCalendar from './deductedCloudCalendar';
+import editNickname from './editNickname';
+
 export {
   getNovels,
   login,
@@ -32,7 +33,7 @@ export {
   getMyNovel,
   getAccumulatedCloudHistory,
   getDeductedCloudHistory,
-  editNickname,
   accumulatedCloudCalendar,
   deductedCloudCalendar,
+  editNickname,
 };
