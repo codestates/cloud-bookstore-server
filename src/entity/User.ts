@@ -93,4 +93,12 @@ export default class User extends BaseEntity {
       .where('user.id = :id', { id: userId })
       .execute();
   }
+
+  static async addUser(nickname: string, email: string) {
+    return await this.createQueryBuilder('user')
+      .insert()
+      .into(User)
+      .values({ nickname, email })
+      .execute();
+  }
 }
