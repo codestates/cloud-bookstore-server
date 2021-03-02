@@ -93,4 +93,48 @@ export default class User extends BaseEntity {
       .where('user.id = :id', { id: userId })
       .execute();
   }
+
+  static async checkEmailLogin(email: string) {
+    return await this.createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .getOne();
+  }
+
+  static async addUser(nickname: string, email: string) {
+    return await this.createQueryBuilder('user')
+      .insert()
+      .into(User)
+      .values({ nickname, email })
+      .execute();
+  }
+
+  static async lastLogin(email: string) {
+    return await this.createQueryBuilder('user')
+      .update(User)
+      .set({ cloud: () => 'cloud' })
+      .where('user.email = :email', { email })
+      .execute();
+  }
+
+  static async plusCloud(email: string) {
+    return await this.createQueryBuilder('user')
+      .update(User)
+      .set({ cloud: () => 'cloud + 3' })
+      .where('user.email = :email', { email })
+      .execute();
+  }
+
+  static async getUdatedAt(email: string) {
+    return await this.createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .select('user.updatedAt')
+      .getRawOne();
+  }
+
+  static async getUserId(email: string) {
+    return await this.createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .select('user.id')
+      .getRawOne();
+  }
 }
