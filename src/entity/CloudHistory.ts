@@ -66,4 +66,13 @@ export default class CloudHistory extends BaseEntity {
       .where('cloudHistory.userId = :userId', { userId })
       .getMany();
   }
+
+
+  static async addLoginHistory(userId: number) {
+    return await this.createQueryBuilder('cloudHistory')
+      .insert()
+      .into(CloudHistory)
+      .values({ userId, novelId: 0, novelEpisodeId: 0, cloud:3, purchase:false })
+      .execute();
+  }
 }
