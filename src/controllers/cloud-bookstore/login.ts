@@ -28,7 +28,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,
@@ -55,7 +55,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,
@@ -85,7 +85,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,
@@ -112,7 +112,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,
@@ -142,7 +142,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,
@@ -169,7 +169,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let data = await User.checkEmailLogin(email);
       res
         .status(200)
-        .cookie('userId', id, {
+        .cookie('userId', id.user_id, {
           sameSite: 'none',
           httpOnly: true,
           secure: true,

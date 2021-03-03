@@ -1,5 +1,6 @@
 import getNovels from './getNovels';
 import login from './login';
+import logout from './logout';
 import category from './category';
 import getNovel from './getNovel';
 import likeNovel from './likeNovel';
@@ -20,6 +21,7 @@ import editNickname from './editNickname';
 export {
   getNovels,
   login,
+  logout,
   category,
   getNovel,
   likeNovel,
