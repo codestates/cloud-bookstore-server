@@ -11,6 +11,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
+    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -25,7 +26,14 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     } else {
       let today = new Date(); //현재 요일 월 일 년 시분초
       let year = today.getFullYear(); // 년도
@@ -35,18 +43,24 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginRawDate = await User.getUdatedAt(email);
       loginRawDate = loginRawDate.user_updated_at;
       let loginYear = loginRawDate.getFullYear();
-      let loginMonth = loginRawDate.getMonth()+1;
+      let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
-      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`
+      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
         await User.plusCloud(email);
-        let id = await User.getUserId(email);
         await CloudHistory.addLoginHistory(id.user_id);
       }
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     }
   } else if (oauth === 'kakao') {
     let nickname = req.body.data.profile.properties.nickname;
@@ -54,6 +68,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
+    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -68,7 +83,14 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     } else {
       let today = new Date(); //현재 요일 월 일 년 시분초
       let year = today.getFullYear(); // 년도
@@ -78,18 +100,24 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginRawDate = await User.getUdatedAt(email);
       loginRawDate = loginRawDate.user_updated_at;
       let loginYear = loginRawDate.getFullYear();
-      let loginMonth = loginRawDate.getMonth()+1;
+      let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
-      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`
+      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
         await User.plusCloud(email);
-        let id = await User.getUserId(email);
         await CloudHistory.addLoginHistory(id.user_id);
       }
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     }
   } else if (oauth === 'facebook') {
     let nickname = req.body.data.name;
@@ -97,6 +125,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
+    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -111,7 +140,14 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     } else {
       let today = new Date(); //현재 요일 월 일 년 시분초
       let year = today.getFullYear(); // 년도
@@ -121,18 +157,24 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginRawDate = await User.getUdatedAt(email);
       loginRawDate = loginRawDate.user_updated_at;
       let loginYear = loginRawDate.getFullYear();
-      let loginMonth = loginRawDate.getMonth()+1;
+      let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
-      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`
+      loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
         await User.plusCloud(email);
-        let id = await User.getUserId(email);
         await CloudHistory.addLoginHistory(id.user_id);
       }
       let data = await User.checkEmailLogin(email);
-      res.status(200).send({ data });
+      res
+        .status(200)
+        .cookie('userId', id, {
+          sameSite: 'none',
+          httpOnly: true,
+          secure: true,
+        })
+        .send({ data });
     }
   } else {
     res.status(401).send('Unauthorized');
