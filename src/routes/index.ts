@@ -9,6 +9,9 @@ router.get('/novels', controllers.getNovels);
 // * https://server.cloud-bookstore.com/login
 router.post('/login', controllers.login);
 
+// * https://server.cloud-bookstore.com/logout
+router.get('/logout', controllers.logout);
+
 // * https://server.cloud-bookstore.com/category/:id
 router.get('/category/:id', controllers.category);
 
