@@ -11,7 +11,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
-    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -26,6 +25,8 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
+      let id = await User.getUserId(email);
+      await CloudHistory.addFirstLoginHistory(id.user_id);
       res
         .status(200)
         .cookie('userId', id.user_id, {
@@ -46,6 +47,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
       loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
+      let id = await User.getUserId(email);
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
@@ -68,7 +70,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
-    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -83,6 +84,8 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
+      let id = await User.getUserId(email);
+      await CloudHistory.addFirstLoginHistory(id.user_id);
       res
         .status(200)
         .cookie('userId', id.user_id, {
@@ -103,6 +106,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
       loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
+      let id = await User.getUserId(email);
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
@@ -125,7 +129,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     let length = nickname.length;
     let count = 0;
     let notFirst = await User.checkEmailLogin(email);
-    let id = await User.getUserId(email);
     if (!notFirst) {
       async function check(nickname: string): Promise<any> {
         let existNickname = await User.checkNicknameAvailability(nickname);
@@ -140,6 +143,8 @@ export default async (req: Request, res: Response): Promise<void> => {
       await check(nickname);
       count = 0;
       let data = await User.checkEmailLogin(email);
+      let id = await User.getUserId(email);
+      await CloudHistory.addFirstLoginHistory(id.user_id);
       res
         .status(200)
         .cookie('userId', id.user_id, {
@@ -160,6 +165,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       let loginMonth = loginRawDate.getMonth() + 1;
       let loginDate = loginRawDate.getDate();
       loginRawDate = `${loginYear}-${loginMonth}-${loginDate}`;
+      let id = await User.getUserId(email);
       if (todayDate === loginRawDate) {
         await User.lastLogin(email);
       } else {
