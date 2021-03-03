@@ -18,5 +18,4 @@ export default {
     migrationsDir: 'src/migration',
     subscribersDir: 'src/subscriber',
   },
-  timezone: '+09:00',
 };
