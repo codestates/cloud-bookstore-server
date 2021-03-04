@@ -184,11 +184,11 @@ export default class Novel extends BaseEntity {
       .getOne();
   }
 
-  static async completeNovel(novelId: number) {
+  static async completeNovel(novelId: number, complete: boolean) {
     return await this.createQueryBuilder('novel')
       .update(Novel)
       .set({
-        complete: () => 'complete = true',
+        complete: complete === true ? true : false,
       })
       .where('novel.id = :id', { id: novelId })
       .execute();
