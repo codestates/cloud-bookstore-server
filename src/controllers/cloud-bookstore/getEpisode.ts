@@ -36,35 +36,26 @@ export default async (req: Request, res: Response): Promise<void> => {
             } else {
               // 사용가능한 구름이 있다면,
               await User.cutCloud(userId) // 구름 1 차감
-                .then(
-                  async () =>
-                    // 사용자 기록 저장
-                    await UserHistory.addHistory(userId, novelId, episodeId),
+                .then(() =>
+                  // 사용자 기록 저장
+                  UserHistory.addHistory(userId, novelId, episodeId),
                 )
-                .then(
-                  async () =>
-                    // 구름 기록 저장
-                    await CloudHistory.updateEpisodeCloud(
-                      userId,
-                      novelId,
-                      episodeId,
-                    ),
+                .then(() =>
+                  // 구름 기록 저장
+                  CloudHistory.updateEpisodeCloud(userId, novelId, episodeId),
                 )
-                .then(async () => await Episode.getThumbnail(episodeId))
+                .then(() => Episode.getThumbnail(episodeId))
                 // 회차에 저장 된 thumbnail 가져오기
-                .then(
-                  async (data) =>
-                    // 사용 내역 저장
-                    await Purchase.addPurchase(
-                      userId,
-                      episodeId,
-                      data.episode_thumbnail,
-                    ),
+                .then((data) =>
+                  // 사용 내역 저장
+                  Purchase.addPurchase(
+                    userId,
+                    episodeId,
+                    data.episode_thumbnail,
+                  ),
                 )
-                .then(async () => await Novel.updateCloud(novelId))
-                .then(
-                  async () => await Episode.findByEpisodeId(episodeId, novelId),
-                )
+                .then(() => Novel.updateCloud(novelId))
+                .then(() => Episode.findByEpisodeId(episodeId, novelId))
                 // 회차의 누적구름 추가 및 회차의 타이틀과 내용 가져오기
                 .then((episode) =>
                   res.status(200).send({ episode, novelTitle }),
@@ -73,9 +64,7 @@ export default async (req: Request, res: Response): Promise<void> => {
           } else {
             // 유저가 이미 구매한 회차면 따로 cloud 차감 없이 사용 내역 업데이트
             await UserHistory.addHistory(userId, novelId, episodeId)
-              .then(
-                async () => await Episode.findByEpisodeId(episodeId, novelId),
-              )
+              .then(() => Episode.findByEpisodeId(episodeId, novelId))
               .then((episode) => res.status(200).send({ episode, novelTitle }));
           }
         });
