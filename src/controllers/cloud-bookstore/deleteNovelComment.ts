@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import NovelComment from '../../entity/NovelComment';
+import User from '../../entity/User';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
@@ -10,11 +11,22 @@ export default async (req: Request, res: Response): Promise<void> => {
     if (!userId) {
       res.status(401).send('unauthorized');
     } else {
-      const comments = await NovelComment.deleteComment(commentId).then(() =>
-        NovelComment.findByNovelId(novelId),
+      const nickname = await User.findNickname(userId).then(
+        (data) => data.user_nickname,
       );
-
-      res.status(200).send({ message: 'successfully deleted', comments });
+      await NovelComment.checkValidity(nickname, commentId).then(
+        async (data) => {
+          console.log(data);
+          if (!data) {
+            res.status(200).send('unauthorized');
+          } else {
+            const comments = await NovelComment.deleteComment(
+              commentId,
+            ).then(() => NovelComment.findByNovelId(novelId));
+            res.status(200).send({ message: 'successfully deleted', comments });
+          }
+        },
+      );
     }
   } catch (err) {
     res.status(500).send(err);

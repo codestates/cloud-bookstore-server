@@ -18,12 +18,17 @@ export default async (req: Request, res: Response): Promise<void> => {
 
       await NovelComment.checkValidity(nickname, commentId).then(
         async (data) => {
-          const comments = await NovelComment.editComment(
-            commentId,
-            comment,
-          ).then(() => NovelComment.findByNovelId(novelId));
+          console.log(data);
+          if (!data) {
+            res.status(200).send('unauthorized');
+          } else {
+            const comments = await NovelComment.editComment(
+              commentId,
+              comment,
+            ).then(() => NovelComment.findByNovelId(novelId));
 
-          res.status(200).send({ message: 'successfully edited', comments });
+            res.status(200).send({ message: 'successfully edited', comments });
+          }
         },
       );
     }
