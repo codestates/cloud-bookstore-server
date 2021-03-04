@@ -14,7 +14,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     const author = await User.findNickname(userId).then(
       (user) => user.user_nickname,
     );
-
     const novels = await Novel.writeNovel(
       title,
       author,
