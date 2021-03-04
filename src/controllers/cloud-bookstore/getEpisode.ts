@@ -61,6 +61,7 @@ export default async (req: Request, res: Response): Promise<void> => {
                       data.episode_thumbnail,
                     ),
                 )
+                .then(async () => await Novel.updateCloud(novelId))
                 .then(
                   async () => await Episode.findByEpisodeId(episodeId, novelId),
                 )
