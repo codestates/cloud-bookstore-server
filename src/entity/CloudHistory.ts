@@ -89,7 +89,7 @@ export default class CloudHistory extends BaseEntity {
         userId,
         novelId: 0,
         novelEpisodeId: 0,
-        cloud: 3,
+        cloud: 10,
         purchase: false,
       })
       .execute();
