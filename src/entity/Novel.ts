@@ -177,4 +177,14 @@ export default class Novel extends BaseEntity {
       })
       .execute();
   }
+
+  static async updateCloud(novelId: number) {
+    return await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        cloud: () => 'cloud + 1',
+      })
+      .where('novel.id = :id', { id: novelId })
+      .execute();
+  }
 }
