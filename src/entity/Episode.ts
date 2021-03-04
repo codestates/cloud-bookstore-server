@@ -100,6 +100,7 @@ export default class Episode extends BaseEntity {
       .where('episode.id = :episodeId', { episodeId })
       .select('episode.id')
       .addSelect('episode.title')
+      .addSelect('episode.episodeNum')
       .getOne();
   }
 }

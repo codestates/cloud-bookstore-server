@@ -24,7 +24,12 @@ export default async (req: Request, res: Response): Promise<void> => {
       const data = await Novel.findByNovelId(novelId);
       const episodes = await Episode.findByNovelId(novelId);
       const comments = await NovelComment.findByNovelId(novelId);
-      const userHistory = await UserHistory.findByNovelId(userId, novelId);
+      const userHistory = await UserHistory.findByNovelId(
+        userId,
+        novelId,
+      ).then((data) =>
+        Episode.findByEpisodeHis(data.userHistory_novelEpisodeId),
+      );
       const userLike = await UserLike.findByNovelId(userId, novelId);
       const userPurchases = await Purchase.findByNovelId(userId, novelId);
 
