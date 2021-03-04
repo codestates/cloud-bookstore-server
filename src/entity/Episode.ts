@@ -56,7 +56,7 @@ export default class Episode extends BaseEntity {
       .getMany();
   }
 
-  static async findByEpisodeId(episodeId: number, novelId: number) {
+  static async updateCloud(episodeId: number, novelId: number) {
     await this.createQueryBuilder('episode')
       .update(Episode)
       .set({
@@ -65,12 +65,12 @@ export default class Episode extends BaseEntity {
       .where('episode.id = :id', { id: episodeId })
       .andWhere('episode.novelId = :novelId', { novelId })
       .execute();
+  }
 
+  static async findByEpisodeId(episodeId: number, novelId: number) {
     return await this.createQueryBuilder('episode')
       .where('episode.id = :id', { id: episodeId })
       .andWhere('episode.novelId = :novelId', { novelId })
-      .select('episode.title')
-      .addSelect('episode.text')
       .getOne();
   }
 

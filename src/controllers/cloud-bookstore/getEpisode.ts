@@ -16,7 +16,6 @@ export default async (req: Request, res: Response): Promise<void> => {
       // 로그인이 되어있다면,
       const novelTitle = await Novel.findByNovelIdTitleOnly(novelId);
       await Purchase.findByNovelId(userId, novelId).then(async (purchased) => {
-        console.log(purchased);
         // 구입한 기록 확인부터
         await Promise.all(
           purchased.filter((purchase) => purchase.episodeId === episodeId),
@@ -55,6 +54,7 @@ export default async (req: Request, res: Response): Promise<void> => {
                   ),
                 )
                 .then(() => Novel.updateCloud(novelId))
+                .then(() => Episode.updateCloud(episodeId, novelId))
                 .then(() => Episode.findByEpisodeId(episodeId, novelId))
                 // 회차의 누적구름 추가 및 회차의 타이틀과 내용 가져오기
                 .then((episode) =>
