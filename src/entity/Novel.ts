@@ -178,6 +178,22 @@ export default class Novel extends BaseEntity {
       .execute();
   }
 
+  static async getCurrentNovel(title: string) {
+    return await this.createQueryBuilder('novel')
+      .where('novel.title = :title', { title })
+      .getOne();
+  }
+
+  static async completeNovel(novelId: number) {
+    return await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        complete: () => 'complete = true',
+      })
+      .where('novel.id = :id', { id: novelId })
+      .execute();
+  }
+
   static async updateCloud(novelId: number) {
     return await this.createQueryBuilder('novel')
       .update(Novel)

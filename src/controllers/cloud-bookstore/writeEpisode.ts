@@ -9,18 +9,34 @@ export default async (req: Request, res: Response): Promise<void> => {
     const title: string = req.body.title;
     const text: string = req.body.text;
     const thumbnail: string = req.body.thumbnail;
+    const complete: boolean = req.body.complete;
 
-    const episodes = await Episode.writeEpisode(
-      episodeNum,
-      novelId,
-      title,
-      text,
-      thumbnail,
-    )
-      .then(() => Novel.countEpisode(novelId))
-      .then(() => Episode.findByNovelId(novelId));
+    if (complete) {
+      const episode = await Episode.writeEpisode(
+        episodeNum,
+        novelId,
+        title,
+        text,
+        thumbnail,
+      )
+        .then(() => Novel.countEpisode(novelId))
+        .then(() => Episode.findByNovelId(novelId))
+        .then(() => Novel.completeNovel(novelId));
 
-    res.status(200).send({ episodes });
+      res.status(200).send({ episode });
+    } else {
+      const episodes = await Episode.writeEpisode(
+        episodeNum,
+        novelId,
+        title,
+        text,
+        thumbnail,
+      )
+        .then(() => Novel.countEpisode(novelId))
+        .then(() => Episode.findByNovelId(novelId));
+
+      res.status(200).send({ episodes });
+    }
   } catch (err) {
     res.status(500).send(err);
   }

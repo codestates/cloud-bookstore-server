@@ -14,7 +14,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     const author = await User.findNickname(userId).then(
       (user) => user.user_nickname,
     );
-
     const novels = await Novel.writeNovel(
       title,
       author,
@@ -25,7 +24,9 @@ export default async (req: Request, res: Response): Promise<void> => {
       .then((data) => UserWork.saveMyNovel(userId, data.identifiers[0].id))
       .then(() => Novel.findAllNovelsByUser(author));
 
-    res.status(200).send({ novels });
+    const currentNovel = await Novel.getCurrentNovel(title);
+
+    res.status(200).send({ novels, currentNovel });
   } catch (err) {
     res.status(500).send(err);
   }
