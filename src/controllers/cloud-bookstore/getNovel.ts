@@ -30,6 +30,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       ).then((data) =>
         Episode.findByEpisodeHis(data.userHistory_novelEpisodeId),
       );
+      const historyDate = await UserHistory.findByNovelId(userId, novelId);
       const userLike = await UserLike.findByNovelId(userId, novelId);
       const userPurchases = await Purchase.findByNovelId(userId, novelId);
 
@@ -38,7 +39,7 @@ export default async (req: Request, res: Response): Promise<void> => {
           data,
           episodes,
           comments,
-          userHistory,
+          userHistory: { ...userHistory, ...historyDate },
           userLike: true,
           userPurchases,
         });
