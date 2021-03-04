@@ -177,4 +177,10 @@ export default class Novel extends BaseEntity {
       })
       .execute();
   }
+
+  static async getCurrentNovel(title: string) {
+    return await this.createQueryBuilder('novel')
+      .where('novel.title = :title', { title })
+      .getOne();
+  }
 }
