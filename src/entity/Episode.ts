@@ -102,6 +102,7 @@ export default class Episode extends BaseEntity {
       .addSelect('episode.title')
       .addSelect('episode.episodeNum')
       .addSelect('episode.cloud')
+      .addSelect('episode.thumbnail')
       .getOne();
   }
 }
