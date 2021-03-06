@@ -1,6 +1,7 @@
 {
    "name": "cloud_bookstore-server",
    "version": "1.0.0",
+   "private": true,
    "description": "",
    "main": "index.js",
    "scripts": {
@@ -40,7 +41,6 @@
       "husky": "^5.0.9",
       "prettier": "^2.2.1",
       "sequelize-cli-typescript": "^3.2.0-c",
-      "ts-node": "3.3.0",
       "typescript": "3.3.3333"
    }
 }
