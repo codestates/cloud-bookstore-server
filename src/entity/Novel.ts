@@ -133,6 +133,24 @@ export default class Novel extends BaseEntity {
       .getOne();
   }
 
+  static async disLikeNovel(novelId: number): Promise<Novel | void> {
+    await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        userLike: () => 'userLike - 1',
+      })
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .execute();
+    return await this.createQueryBuilder('novel')
+      .where('novel.id = :id', {
+        id: novelId,
+      })
+      .select('novel.userLike')
+      .getOne();
+  }
+
   static async writeNovel(
     title: string,
     author: string,
