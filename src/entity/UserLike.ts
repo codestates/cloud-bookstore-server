@@ -60,4 +60,13 @@ export default class UserLike extends BaseEntity {
       })
       .execute();
   }
+
+  static async deleteUserLike(userId: number, novelId: number) {
+    return await this.createQueryBuilder('userLike')
+      .delete()
+      .from(UserLike)
+      .where('user_like.userId = :userId', { userId: userId })
+      .andWhere('user_like.novelId = :novelId', { novelId: novelId })
+      .execute();
+  }
 }
