@@ -24,34 +24,53 @@ export default async (req: Request, res: Response): Promise<void> => {
       const data = await Novel.findByNovelId(novelId);
       const episodes = await Episode.findByNovelId(novelId);
       const comments = await NovelComment.findByNovelId(novelId);
-      const userHistory = await UserHistory.findByNovelId(
-        userId,
-        novelId,
-      ).then((data) =>
-        Episode.findByEpisodeHis(data.userHistory_novelEpisodeId),
-      );
-      const historyDate = await UserHistory.findByNovelId(userId, novelId);
+      const userHistory = await UserHistory.findByNovelId(userId, novelId);
       const userLike = await UserLike.findByNovelId(userId, novelId);
       const userPurchases = await Purchase.findByNovelId(userId, novelId);
 
-      if (userId && userLike) {
-        res.status(200).send({
-          data,
-          episodes,
-          comments,
-          userHistory: { ...userHistory, ...historyDate },
-          userLike: true,
-          userPurchases,
-        });
-      } else if (userId && !userLike) {
-        res.status(200).send({
-          data,
-          episodes,
-          comments,
-          userHistory,
-          userLike: false,
-          userPurchases,
-        });
+      if (userHistory) {
+        const episodeDetail = await Episode.findByEpisodeHis(
+          userHistory.novelEpisodeId,
+        );
+        if (userId && userLike) {
+          res.status(200).send({
+            data,
+            episodes,
+            comments,
+            userHistory: { ...episodeDetail, ...userHistory },
+            userLike: true,
+            userPurchases,
+          });
+        } else if (userId && !userLike) {
+          res.status(200).send({
+            data,
+            episodes,
+            comments,
+            userHistory: { ...userHistory, ...episodeDetail },
+            userLike: false,
+            userPurchases,
+          });
+        }
+      } else {
+        if (userId && userLike) {
+          res.status(200).send({
+            data,
+            episodes,
+            comments,
+            userHistory: {},
+            userLike: true,
+            userPurchases,
+          });
+        } else if (userId && !userLike) {
+          res.status(200).send({
+            data,
+            episodes,
+            comments,
+            userHistory: {},
+            userLike: false,
+            userPurchases,
+          });
+        }
       }
     }
   } catch (err) {

@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 
 import User from './User';
-import Novel from './Novel';
 
 @Entity()
 export default class UserHistory extends BaseEntity {
@@ -45,7 +44,7 @@ export default class UserHistory extends BaseEntity {
       .addSelect('userHistory.updatedAt')
       .orderBy('userHistory.updatedAt', 'DESC')
       .take(1)
-      .getRawOne();
+      .getOne();
   }
 
   static async findAllMyEpisode(userId: number): Promise<UserHistory[]> {

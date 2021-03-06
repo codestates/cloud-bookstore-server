@@ -45,7 +45,7 @@ export default async (req: Request, res: Response): Promise<void> => {
                 )
                 .then(() => Episode.getThumbnail(episodeId))
                 // 회차에 저장 된 thumbnail 가져오기
-                .then((data) =>
+                .then((data: any) =>
                   // 사용 내역 저장
                   Purchase.addPurchase(
                     userId,
