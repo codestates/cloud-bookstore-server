@@ -46,7 +46,7 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: { ...userHistory, ...episodeDetail },
+            userHistory: { ...episodeDetail, ...userHistory },
             userLike: false,
             userPurchases,
           });
@@ -57,7 +57,15 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: {},
+            userHistory: {
+              id: 0,
+              episodeNum: 0,
+              title: 'null',
+              thumbnail: 'null',
+              cloud: 0,
+              novelEpisodeId: 0,
+              updatedAt: 'null',
+            },
             userLike: true,
             userPurchases,
           });
@@ -66,7 +74,15 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: {},
+            userHistory: {
+              id: 0,
+              episodeNum: 0,
+              title: 'null',
+              thumbnail: 'null',
+              cloud: 0,
+              novelEpisodeId: 0,
+              updatedAt: 'null',
+            },
             userLike: false,
             userPurchases,
           });

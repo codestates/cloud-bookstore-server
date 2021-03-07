@@ -20,7 +20,6 @@ export default async (req: Request, res: Response): Promise<void> => {
         await Promise.all(
           purchased.filter((purchase) => purchase.episodeId === episodeId),
         ).then(async (purchase) => {
-          console.log(purchase);
           if (purchase.length === 0) {
             // 구입한 기록이 없다면,
             const cloudBalance = await User.checkCloudBalance(userId);
