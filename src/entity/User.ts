@@ -124,7 +124,7 @@ export default class User extends BaseEntity {
       .execute();
   }
 
-  static async getUdatedAt(email: string) {
+  static async getUpdatedAt(email: string) {
     return await this.createQueryBuilder('user')
       .where('user.email = :email', { email })
       .select('user.updatedAt')

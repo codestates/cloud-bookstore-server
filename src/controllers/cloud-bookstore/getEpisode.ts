@@ -69,7 +69,14 @@ export default async (req: Request, res: Response): Promise<void> => {
         });
       });
     } else {
-      res.status(200).send('다음 회차를 보기 위해 로그인을 해주세요.');
+      if (episodeId === 1) {
+        const novelTitle = await Novel.findByNovelIdTitleOnly(novelId);
+        Episode.findByEpisodeId(episodeId, novelId).then((episode) =>
+          res.status(200).send({ episode, novelTitle }),
+        );
+      } else {
+        res.status(200).send('다음 회차를 보기 위해 로그인을 해주세요.');
+      }
     }
   } catch (err) {
     res.status(500).send(err);
