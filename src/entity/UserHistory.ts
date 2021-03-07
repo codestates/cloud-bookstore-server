@@ -43,8 +43,7 @@ export default class UserHistory extends BaseEntity {
       .select('userHistory.novelEpisodeId')
       .addSelect('userHistory.updatedAt')
       .orderBy('userHistory.updatedAt', 'DESC')
-      .take(1)
-      .getOne();
+      .getMany();
   }
 
   static async findAllMyEpisode(userId: number): Promise<UserHistory[]> {

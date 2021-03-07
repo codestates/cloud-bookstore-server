@@ -19,25 +19,28 @@ export default async (req: Request, res: Response): Promise<void> => {
         data,
         episodes,
         comments,
+        userHistory: [],
+        userLike: false,
+        userPurchases: [],
       });
     } else {
       const data = await Novel.findByNovelId(novelId);
       const episodes = await Episode.findByNovelId(novelId);
       const comments = await NovelComment.findByNovelId(novelId);
-      const userHistory = await UserHistory.findByNovelId(userId, novelId);
       const userLike = await UserLike.findByNovelId(userId, novelId);
       const userPurchases = await Purchase.findByNovelId(userId, novelId);
+      const userHistory = await UserHistory.findByNovelId(userId, novelId);
 
-      if (userHistory) {
+      if (userHistory.length !== 0) {
         const episodeDetail = await Episode.findByEpisodeHis(
-          userHistory.novelEpisodeId,
+          userHistory[0].novelEpisodeId,
         );
         if (userId && userLike) {
           res.status(200).send({
             data,
             episodes,
             comments,
-            userHistory: { ...episodeDetail, ...userHistory },
+            userHistory: { userHistory, episodeDetail },
             userLike: true,
             userPurchases,
           });
@@ -46,7 +49,7 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: { ...episodeDetail, ...userHistory },
+            userHistory: { userHistory, episodeDetail },
             userLike: false,
             userPurchases,
           });
@@ -57,15 +60,7 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: {
-              id: 0,
-              episodeNum: 0,
-              title: 'null',
-              thumbnail: 'null',
-              cloud: 0,
-              novelEpisodeId: 0,
-              updatedAt: 'null',
-            },
+            userHistory,
             userLike: true,
             userPurchases,
           });
@@ -74,15 +69,7 @@ export default async (req: Request, res: Response): Promise<void> => {
             data,
             episodes,
             comments,
-            userHistory: {
-              id: 0,
-              episodeNum: 0,
-              title: 'null',
-              thumbnail: 'null',
-              cloud: 0,
-              novelEpisodeId: 0,
-              updatedAt: 'null',
-            },
+            userHistory,
             userLike: false,
             userPurchases,
           });
