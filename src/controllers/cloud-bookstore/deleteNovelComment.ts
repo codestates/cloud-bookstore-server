@@ -16,7 +16,6 @@ export default async (req: Request, res: Response): Promise<void> => {
       );
       await NovelComment.checkValidity(nickname, commentId).then(
         async (data) => {
-          console.log(data);
           if (!data) {
             res.status(200).send('unauthorized');
           } else {
