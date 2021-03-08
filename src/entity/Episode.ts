@@ -50,7 +50,7 @@ export default class Episode extends BaseEntity {
   })
   novel!: Novel;
 
-  static async findByNovelId(novelId: number): Promise<Episode[] | void> {
+  static async findByNovelId(novelId: number): Promise<Episode[]> {
     return await this.createQueryBuilder('episode')
       .where('episode.novelId = :novelId', { novelId })
       .getMany();
@@ -104,5 +104,13 @@ export default class Episode extends BaseEntity {
       .addSelect('episode.cloud')
       .addSelect('episode.thumbnail')
       .getOne();
+  }
+
+  static async deleteNovel(novelId: number) {
+    return await this.createQueryBuilder('episode')
+      .delete()
+      .from(Episode)
+      .where('novelId = :novelId', { novelId })
+      .execute();
   }
 }

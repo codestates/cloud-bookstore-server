@@ -221,4 +221,34 @@ export default class Novel extends BaseEntity {
       .where('novel.id = :id', { id: novelId })
       .execute();
   }
+
+  static async deleteNovel(novelId: number) {
+    return await this.createQueryBuilder('novel')
+      .delete()
+      .from(Novel)
+      .where('id = :id', { id: novelId })
+      .execute();
+  }
+
+  static async editNovel(
+    id: number,
+    title: string,
+    category: number,
+    description: string,
+    thumbnail: string,
+  ) {
+    return await this.createQueryBuilder('novel')
+      .update(Novel)
+      .set({
+        id,
+        title,
+        category,
+        description,
+        thumbnail,
+      })
+      .where('novel.id = :id', {
+        id,
+      })
+      .execute();
+  }
 }

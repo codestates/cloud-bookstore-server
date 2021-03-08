@@ -74,4 +74,12 @@ export default class Purchase extends BaseEntity {
       })
       .execute();
   }
+
+  static async deleteNovel(id: number) {
+    return await this.createQueryBuilder('purchase')
+      .delete()
+      .from(Purchase)
+      .where('episodeId = :episodeId', { episodeId: id })
+      .execute();
+  }
 }

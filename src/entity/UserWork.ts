@@ -46,4 +46,12 @@ export default class UserWork extends BaseEntity {
       .where('userWork.userId = :userId', { userId })
       .getMany();
   }
+
+  static async deleteNovel(novelId: number) {
+    return await this.createQueryBuilder('userWork')
+      .delete()
+      .from(UserWork)
+      .where('novelId = :novelId', { novelId })
+      .execute();
+  }
 }
