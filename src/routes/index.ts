@@ -45,8 +45,8 @@ router.post('/mypage/write/novel', controllers.writeNovel);
 // * https://server.cloud-bookstore.com/mypage/edit/novel
 router.patch('/mypage/edit/novel', controllers.editNovel);
 
-// * https://server.cloud-bookstore.com/mypage/delete/novel
-router.delete('/mypage/delete/novel', controllers.deleteNovel);
+// * https://server.cloud-bookstore.com/mypage/delete/novel/:novelId
+router.delete('/mypage/delete/novel/:novelId', controllers.deleteNovel);
 
 // * https://server.cloud-bookstore.com/mypage/write/episode
 router.post('/mypage/write/episode', controllers.writeEpisode);
@@ -54,8 +54,8 @@ router.post('/mypage/write/episode', controllers.writeEpisode);
 // * https://server.cloud-bookstore.com/mypage/edit/episode
 router.patch('/mypage/edit/episode', controllers.editEpisode);
 
-// * https://server.cloud-bookstore.com/mypage/delete/episode
-router.delete('/mypage/delete/episode', controllers.deleteEpisode);
+// * https://server.cloud-bookstore.com/mypage/delete/episode/:episodeId
+router.delete('/mypage/delete/episode/:episodeId', controllers.deleteEpisode);
 
 // * https://server.cloud-bookstore.com/mypage/novel/:novelId
 router.get('/mypage/novel/:novelId', controllers.getMyNovel);
