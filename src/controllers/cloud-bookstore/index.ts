@@ -10,7 +10,11 @@ import deleteNovelComment from './deleteNovelComment';
 import getEpisode from './getEpisode';
 import mypage from './mypage';
 import writeNovel from './writeNovel';
+import editNovel from './editNovel';
+import deleteNovel from './deleteNovel';
 import writeEpisode from './writeEpisode';
+import editEpisode from './editEpisode';
+import deleteEpisode from './deleteEpisode';
 import getMyNovel from './getMyNovel';
 import getAccumulatedCloudHistory from './getAccumulatedCloudHistory';
 import getDeductedCloudHistory from './getDeductedCloudHistory';
@@ -31,7 +35,11 @@ export {
   getEpisode,
   mypage,
   writeNovel,
+  editNovel,
+  deleteNovel,
   writeEpisode,
+  editEpisode,
+  deleteEpisode,
   getMyNovel,
   getAccumulatedCloudHistory,
   getDeductedCloudHistory,
