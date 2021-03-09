@@ -144,7 +144,7 @@ export default class Episode extends BaseEntity {
     return await this.createQueryBuilder('episode')
       .delete()
       .from(Episode)
-      .where('episode.id = :id', { id })
+      .where('id = :id', { id })
       .execute();
   }
 }
