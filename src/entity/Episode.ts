@@ -117,7 +117,7 @@ export default class Episode extends BaseEntity {
   static async findByOnlyEpisodeId(episodeId: number) {
     return await this.createQueryBuilder('episode')
       .where('episode.id = :episodeId', { episodeId })
-      .select('episode.novelId')
+      .select('episode.episodeNum')
       .getRawOne();
   }
 
