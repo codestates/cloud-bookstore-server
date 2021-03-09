@@ -15,12 +15,12 @@ export default async (req: Request, res: Response): Promise<void> => {
     if (isMyWork === undefined) {
       res.status(401).send('이 소설의 저자가 아닙니다');
     } else {
+      await Purchase.deleteNovel(episodeId);
       await Episode.deleteEpisode(episodeId);
       await CloudHistory.deleteEpisodeIdOfCloudHistory(episodeId);
       await Novel.episodeCountDawn(novelId);
-      await Purchase.deleteNovel(episodeId);
       await UserHistory.deleteEpisode(episodeId);
-      res.status(200).send('Successfully delete');
+      res.status(200).send('Successfully deleted');
     }
   } catch (err) {
     res.status(500).send(err);
