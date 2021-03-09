@@ -94,4 +94,16 @@ export default class CloudHistory extends BaseEntity {
       })
       .execute();
   }
+
+  static async deleteEpisodeIdOfCloudHistory(novelEpisodeId: number) {
+    return await this.createQueryBuilder('episode')
+      .update()
+      .set({
+        novelEpisodeId: () => '0',
+      })
+      .where('cloudHistory.novelEpisodeId = :novelEpisodeId', {
+        novelEpisodeId,
+      })
+      .execute();
+  }
 }

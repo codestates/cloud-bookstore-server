@@ -54,8 +54,11 @@ router.post('/mypage/write/episode', controllers.writeEpisode);
 // * https://server.cloud-bookstore.com/mypage/edit/episode
 router.patch('/mypage/edit/episode', controllers.editEpisode);
 
-// * https://server.cloud-bookstore.com/mypage/delete/episode/:episodeId
-router.delete('/mypage/delete/episode/:episodeId', controllers.deleteEpisode);
+// * https://server.cloud-bookstore.com/mypage/delete/episode/:novelId/:episodeId
+router.delete(
+  '/mypage/delete/episode/:novelId/:episodeId',
+  controllers.deleteEpisode,
+);
 
 // * https://server.cloud-bookstore.com/mypage/novel/:novelId
 router.get('/mypage/novel/:novelId', controllers.getMyNovel);

@@ -113,4 +113,38 @@ export default class Episode extends BaseEntity {
       .where('novelId = :novelId', { novelId })
       .execute();
   }
+
+  static async findByOnlyEpisodeId(episodeId: number) {
+    return await this.createQueryBuilder('episode')
+      .where('episode.id = :episodeId', { episodeId })
+      .select('episode.novelId')
+      .getRawOne();
+  }
+
+  static async editEpisode(
+    episodeId: number,
+    episodeNum: number,
+    thumbnail: string,
+    title: string,
+    text: string,
+  ) {
+    return await this.createQueryBuilder('episode')
+      .update(Episode)
+      .set({
+        episodeNum,
+        thumbnail,
+        title,
+        text,
+      })
+      .where('episode.id = :id', { id: episodeId })
+      .execute();
+  }
+
+  static async deleteEpisode(id: number) {
+    return await this.createQueryBuilder('episode')
+      .delete()
+      .from(Episode)
+      .where('episode.id = :id', { id })
+      .execute();
+  }
 }
