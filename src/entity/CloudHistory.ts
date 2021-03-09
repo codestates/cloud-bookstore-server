@@ -101,7 +101,7 @@ export default class CloudHistory extends BaseEntity {
       .set({
         novelEpisodeId: () => '0',
       })
-      .where('cloudHistory.novelEpisodeId = :novelEpisodeId', {
+      .where('novelEpisodeId = :novelEpisodeId', {
         novelEpisodeId,
       })
       .execute();
