@@ -54,4 +54,12 @@ export default class UserWork extends BaseEntity {
       .where('novelId = :novelId', { novelId })
       .execute();
   }
+
+  static async findByNovelIdWithUserId(userId: number, novelId: number) {
+    return await this.createQueryBuilder('userWork')
+      .where('userWork.userId = :userId', { userId })
+      .andWhere('userWork.novelId = :novelId', { novelId })
+      .getOne();
+  }
+
 }

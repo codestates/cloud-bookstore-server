@@ -66,6 +66,17 @@ export default class UserHistory extends BaseEntity {
       .execute();
   }
 
+
+  static async deleteEpisode(novelEpisodeId: number) {
+    return await this.createQueryBuilder('userHistory')
+      .delete()
+      .from(UserHistory)
+      .where('novelEpisodeId = :novelEpisodeId', {
+        novelEpisodeId,
+      })
+      .execute();
+  }
+
   static async deleteNovel(novelId: number) {
     return await this.createQueryBuilder('userHistory')
       .delete()
