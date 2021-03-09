@@ -5,7 +5,9 @@ import Episode from '../../entity/Episode';
 import UserWork from '../../entity/UserWork';
 import User from '../../entity/User';
 import UserLike from '../../entity/UserLike';
+import UserHistory from '../../entity/UserHistory';
 import Purchase from '../../entity/Purchase';
+import CloudHistory from '../../entity/CloudHistory';
 
 export default async (req: Request, res: Response): Promise<void> => {
   try {
@@ -26,7 +28,9 @@ export default async (req: Request, res: Response): Promise<void> => {
       .then(() => Novel.deleteNovel(novelId))
       .then(async () => {
         await UserWork.deleteNovel(novelId);
+        await UserHistory.deleteNovel(novelId);
         await UserLike.deleteNovel(novelId);
+        await CloudHistory.deleteNovel(novelId);
         const author = await User.findNickname(userId).then(
           (info) => info.user_nickname,
         );
