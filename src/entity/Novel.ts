@@ -109,6 +109,7 @@ export default class Novel extends BaseEntity {
     return await this.createQueryBuilder('novel')
       .where('novel.id = :id', { id: novelId })
       .select('novel.title')
+      .addSelect('novel.id')
       .addSelect('novel.thumbnail')
       .addSelect('novel.complete')
       .addSelect('novel.updatedAt')
