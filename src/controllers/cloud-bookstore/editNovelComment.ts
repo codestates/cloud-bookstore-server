@@ -5,9 +5,9 @@ import User from '../../entity/User';
 export default async (req: Request, res: Response): Promise<void> => {
   try {
     const userId: number = +req.cookies.userId;
-    const novelId: number = req.body.novelId;
-    const commentId: number = req.body.commentId;
-    const comment: string = req.body.comment;
+    const novelId: number = req.body.data.novelId;
+    const commentId: number = req.body.data.commentId;
+    const comment: string = req.body.data.comment;
 
     if (!userId) {
       res.status(401).send('unauthorized');
