@@ -253,16 +253,6 @@ export default class Novel extends BaseEntity {
       .execute();
   }
 
-  static async editComplete(id: number) {
-    return await this.createQueryBuilder('novel')
-      .update(Novel)
-      .set({
-        complete: () => 'true',
-      })
-      .where('novel.id = :id', { id })
-      .execute();
-  }
-
   static async episodeCountDawn(id: number) {
     return await this.createQueryBuilder('novel')
       .update(Novel)

@@ -19,38 +19,13 @@ export default async (req: Request, res: Response): Promise<void> => {
     if (isMyWork === undefined) {
       res.status(401).send('이 소설의 저자가 아닙니다');
     } else {
-      if (complete) {
-        await Novel.editComplete(novelId);
-        await Episode.editEpisode(
-          episodeId,
-          episodeNum,
-          thumbnail,
-          title,
-          text,
-        );
-        const episodes = await Episode.findByNovelId(novelId);
-        const currentEpisode = await Episode.findByEpisodeId(
-          episodeId,
-          novelId,
-        );
-        res.status(200).send({ episodes, currentEpisode, novelComplete: true });
-      } else {
-        await Episode.editEpisode(
-          episodeId,
-          episodeNum,
-          thumbnail,
-          title,
-          text,
-        );
-        const episodes = await Episode.findByNovelId(novelId);
-        const currentEpisode = await Episode.findByEpisodeId(
-          episodeId,
-          novelId,
-        );
-        res
-          .status(200)
-          .send({ episodes, currentEpisode, novelComplete: false });
-      }
+      await Novel.completeNovel(novelId, complete);
+      await Episode.editEpisode(episodeId, episodeNum, thumbnail, title, text);
+      const episodes = await Episode.findByNovelId(novelId);
+      const currentEpisode = await Episode.findByEpisodeId(episodeId, novelId);
+      res
+        .status(200)
+        .send({ episodes, currentEpisode, novelComplete: complete });
     }
   } catch (err) {
     res.status(500).send(err);
